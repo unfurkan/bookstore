@@ -1,6 +1,7 @@
 package com.getir.bookstore.core.order.model.domain;
 
 import com.getir.bookstore.core.book.model.domain.Book;
+import com.getir.bookstore.core.common.BaseEntity;
 import com.getir.bookstore.core.customer.model.domain.Customer;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,13 +14,13 @@ import java.util.List;
 @Setter
 @Table(name = "ORDERS")
 @Entity
-public class Order {
+public class Order extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ISBN", unique = true)
+    @Column(name = "CODE", unique = true)
     private String code;
 
     @Column(name = "NOTE")
@@ -31,7 +32,7 @@ public class Order {
     @Column(name = "DELIVERY_ADDRESS")
     private String deliveryAddress;
 
-    @Column(name = "DELIVERY_ADDRESS")
+    @Column(name = "INVOICE_ADDRESS")
     private String invoiceAddress;
 
     @OneToMany(mappedBy = "order")

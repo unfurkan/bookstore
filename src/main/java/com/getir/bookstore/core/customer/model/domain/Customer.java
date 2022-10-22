@@ -1,5 +1,6 @@
 package com.getir.bookstore.core.customer.model.domain;
 
+import com.getir.bookstore.core.common.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "CUSTOMERS")
 @Getter
 @Setter
-public class Customer {
+public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
