@@ -1,5 +1,6 @@
 package com.getir.bookstore.core.book.model.domain;
 
+import com.getir.bookstore.core.order.model.domain.BookStock;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,8 +30,9 @@ public class Book {
     @Column(name = "PUBLISH_DATE")
     private Date publishDate;
 
-    @Column(name = "STOCK_AMOUNT")
-    private Integer stockAmount;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STOCK_ID")
+    private BookStock stock;
 
     @Column(name = "UNIT_PRICE")
     private BigDecimal unitPrice;

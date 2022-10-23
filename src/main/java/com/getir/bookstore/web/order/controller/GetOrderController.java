@@ -21,9 +21,7 @@ public class GetOrderController {
 
     @GetMapping("/{id}")
     public ApplicationResponse filterOrders(@PathVariable("id") Long orderId) {
-
         Order order = orderService.getById(orderId);
-
         return ApplicationResponse.builder()
                 .success(true)
                 .content(getOrderResponseMapper.toResponse(order))

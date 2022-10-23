@@ -8,6 +8,7 @@ import com.getir.bookstore.core.order.model.dto.OrderStatisticsDTO;
 import com.getir.bookstore.core.order.repository.OrderRepository;
 import com.getir.bookstore.core.order.service.OrderService;
 import com.getir.bookstore.core.order.specification.FilterOrderSpecification;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

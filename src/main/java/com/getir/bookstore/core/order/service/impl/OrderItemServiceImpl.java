@@ -5,6 +5,8 @@ import com.getir.bookstore.core.order.repository.OrderItemRepository;
 import com.getir.bookstore.core.order.service.OrderItemService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
@@ -18,5 +20,10 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public OrderItem save(OrderItem order) {
         return orderItemRepository.save(order);
+    }
+
+    @Override
+    public List<OrderItem> saveAll(List<OrderItem> orderItems) {
+        return orderItemRepository.saveAll(orderItems);
     }
 }
