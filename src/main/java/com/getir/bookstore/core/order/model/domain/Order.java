@@ -3,6 +3,8 @@ package com.getir.bookstore.core.order.model.domain;
 import com.getir.bookstore.core.book.model.domain.Book;
 import com.getir.bookstore.core.common.BaseEntity;
 import com.getir.bookstore.core.customer.model.domain.Customer;
+import com.getir.bookstore.core.order.model.enums.Month;
+import com.getir.bookstore.core.order.model.enums.converter.MonthEnumConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +27,10 @@ public class Order extends BaseEntity {
 
     @Column(name = "NOTE")
     private String note;
+
+    @Convert(converter = MonthEnumConverter.class)
+    @Column(name = "ORDER_MONTH")
+    private Month month;
 
     @Column(name = "TOTAL_PRICE")
     private BigDecimal totalPrice;

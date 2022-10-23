@@ -1,10 +1,12 @@
 package com.getir.bookstore.core.order.service.impl;
 
 import com.getir.bookstore.core.order.model.domain.Order;
+import com.getir.bookstore.core.order.model.dto.OrderTest;
 import com.getir.bookstore.core.order.repository.OrderRepository;
 import com.getir.bookstore.core.order.service.OrderService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -28,4 +30,10 @@ public class OrderServiceImpl implements OrderService {
     public Order getById(Long orderId) {
         return orderRepository.findById(orderId).orElseThrow(() -> new NoSuchElementException(ORDER_NOT_FOUND));
     }
+
+    @Override
+    public List<OrderTest> getOrderStatisticsByCustomerId(Long customerId) {
+        return orderRepository.getOrderStatisticsByCustomerId(customerId);
+    }
+
 }
