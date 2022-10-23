@@ -3,6 +3,7 @@ package com.getir.bookstore.web.book.controller;
 import com.getir.bookstore.common.pageable.request.Pageable;
 import com.getir.bookstore.common.pageable.response.PageableResponse;
 import com.getir.bookstore.common.response.ApplicationResponse;
+import com.getir.bookstore.common.utils.PagingUtils;
 import com.getir.bookstore.core.book.model.domain.Book;
 import com.getir.bookstore.core.book.model.dto.FilterBookDTO;
 import com.getir.bookstore.core.book.service.BookService;
@@ -41,18 +42,7 @@ public class FilterBookController {
 
         return ApplicationResponse.builder()
                 .success(true)
-                .content(getPageableResponse(filterBookResponses, pageBook))
+                .content(PagingUtils.getPageableResponse(filterBookResponses, pageBook))
                 .build();
     }
-
-    public PageableResponse getPageableResponse(List<FilterBookResponse> responses, Page<Book> bookPage) {
-        PageableResponse pageableResponse = new PageableResponse<>();
-        pageableResponse.setList(responses);
-        pageableResponse.setTotalElements(bookPage.getTotalElements());
-        pageableResponse.setTotalPages(bookPage.getTotalPages());
-        pageableResponse.setPageNumber(bookPage.getPageable().getPageNumber() + 1);
-        pageableResponse.setPageSize(bookPage.getPageable().getPageSize());
-        return pageableResponse;
-    }
-
 }

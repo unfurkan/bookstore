@@ -17,6 +17,6 @@ public class CreateOrderDTO {
 
     private String invoiceAddress;
 
-    private List<CreateOrderLineItemDTO> orderItems;
+    private List<CreateOrderItemDTO> orderItems;
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -27,5 +28,9 @@ public class OrderItem {
 
     @Column(name = "ITEM_QUANTITY")
     private Integer quantity;
+
+    @Column(name = "UNIT_PRICE")
+    private BigDecimal unitPrice;
+
 
 }

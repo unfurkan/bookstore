@@ -17,6 +17,8 @@ import java.util.Objects;
 public class FilterOrderSpecification implements BaseSpecification<Order, FilterOrderDTO> {
 
     public static final String CREATED_ON = "createdOn";
+    public static final String CUSTOMER = "customer";
+    public static final String ID = "id";
 
     @Override
     public Specification<Order> filter(FilterOrderDTO filterOrderDTO) {
@@ -30,7 +32,11 @@ public class FilterOrderSpecification implements BaseSpecification<Order, Filter
             }
 
             if (Objects.nonNull(filterOrderDTO.getEndDate())) {
-                predicates.add(cb.lessThanOrEqualTo(root.get(CREATED_ON), filterOrderDTO.getStartDate()));
+                predicates.add(cb.lessThanOrEqualTo(root.get(CREATED_ON), filterOrderDTO.getEndDate()));
+            }
+
+            if (Objects.nonNull(filterOrderDTO.getCustomerId())) {
+                predicates.add(cb.equal(root.get(CUSTOMER).get(ID), filterOrderDTO.getCustomerId()));
             }
 
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));

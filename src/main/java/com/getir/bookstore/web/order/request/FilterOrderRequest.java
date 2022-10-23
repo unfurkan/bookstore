@@ -1,4 +1,4 @@
-package com.getir.bookstore.core.order.model.dto;
+package com.getir.bookstore.web.order.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +7,12 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class FilterOrderDTO {
+public class FilterOrderRequest {
+
+    private Long customerId;
 
     private Date startDate;
 
     private Date endDate;
-
-    private Long customerId;
 
 }

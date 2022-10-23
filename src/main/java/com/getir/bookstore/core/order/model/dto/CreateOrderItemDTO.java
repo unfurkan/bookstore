@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateOrderLineItemDTO {
+public class CreateOrderItemDTO {
 
     private Long bookId;
 
