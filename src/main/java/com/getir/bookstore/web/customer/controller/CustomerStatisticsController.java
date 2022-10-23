@@ -2,7 +2,7 @@ package com.getir.bookstore.web.customer.controller;
 
 
 import com.getir.bookstore.common.response.ApplicationResponse;
-import com.getir.bookstore.core.order.model.dto.OrderTest;
+import com.getir.bookstore.core.order.model.dto.OrderStatisticsDTO;
 import com.getir.bookstore.core.order.service.OrderService;
 import com.getir.bookstore.web.customer.mapper.OrderStatisticsResponseMapper;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class CustomerStatisticsController {
     @GetMapping("/{id}/statistics")
     public ApplicationResponse getStatistics(@PathVariable("id") Long customerId) {
 
-        List<OrderTest> statisticsByCustomerId = orderService.getOrderStatisticsByCustomerId(customerId);
+        List<OrderStatisticsDTO> statisticsByCustomerId = orderService.getOrderStatisticsByCustomerId(customerId);
 
         return ApplicationResponse.builder()
                 .success(true)

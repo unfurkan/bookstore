@@ -1,7 +1,7 @@
 package com.getir.bookstore.core.order.service.impl;
 
 import com.getir.bookstore.core.order.model.domain.Order;
-import com.getir.bookstore.core.order.model.dto.OrderTest;
+import com.getir.bookstore.core.order.model.dto.OrderStatisticsDTO;
 import com.getir.bookstore.core.order.repository.OrderRepository;
 import com.getir.bookstore.core.order.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderTest> getOrderStatisticsByCustomerId(Long customerId) {
+    public List<OrderStatisticsDTO> getOrderStatisticsByCustomerId(Long customerId) {
         return orderRepository.getOrderStatisticsByCustomerId(customerId);
     }
 

@@ -18,11 +18,10 @@ public enum Month {
     JUNE("06","month.june"),
     JULY("07","month.july"),
     AUGUST("08","month.august"),
-    SEPTEMBER("09","month.feb"),
-    OCTOBER("10","month.feb"),
-    NOVEMBER("11","month.feb"),
-    DECEMBER("12","month.feb");
-
+    SEPTEMBER("09","month.september"),
+    OCTOBER("10","month.october"),
+    NOVEMBER("11","month.november"),
+    DECEMBER("12","month.december");
 
     private String value;
     private String description;

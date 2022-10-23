@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OrderStatisticsDTO {
 
-    private Integer month;
+    private String month;
 
     private Long orderCount;
 
@@ -19,7 +19,7 @@ public class OrderStatisticsDTO {
 
     private BigDecimal totalAmount;
 
-    public OrderStatisticsDTO(Integer month, Long orderCount, Long bookCount, BigDecimal totalAmount) {
+    public OrderStatisticsDTO(String month, Long orderCount, Long bookCount, BigDecimal totalAmount) {
         this.month = month;
         this.orderCount = orderCount;
         this.bookCount = bookCount;
