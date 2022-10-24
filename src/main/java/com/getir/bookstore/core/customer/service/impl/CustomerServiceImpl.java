@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +36,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Boolean existsByCellPhone(String cellPhone) {
         return customerRepository.existsByCellPhone(cellPhone);
+    }
+
+    @Override
+    public Optional<Customer> findByEmail(String username) {
+        return customerRepository.findByEmail(username);
     }
 }

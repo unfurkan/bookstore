@@ -13,12 +13,10 @@ import javax.transaction.Transactional;
 @Service
 public class UpdateStockUseCaseImpl implements UpdateStockUseCase {
 
-
-    public static final String MIN_STOCK_AMOUNT = "min.book.stock.amount";
-
     private final BookService bookService;
     private final BookStockService bookStockService;
 
+    public static final String MIN_STOCK_AMOUNT = "min.book.stock.amount";
 
     public UpdateStockUseCaseImpl(BookService bookService, BookStockService bookStockService) {
         this.bookService = bookService;
@@ -27,7 +25,6 @@ public class UpdateStockUseCaseImpl implements UpdateStockUseCase {
 
     @Override
     public BookStock exec(UpdateStockDTO updateStockDTO) {
-
 
         if (updateStockDTO.getStockAmount() < 0) {
             throw new RuntimeException(MIN_STOCK_AMOUNT);

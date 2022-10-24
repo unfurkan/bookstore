@@ -1,4 +1,4 @@
-package com.getir.bookstore.configuration;
+package com.getir.bookstore.configuration.audit;
 
 import com.getir.bookstore.common.audit.AuditorAwareImpl;
 import org.springframework.context.annotation.Bean;

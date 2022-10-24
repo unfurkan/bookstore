@@ -5,6 +5,7 @@ import com.getir.bookstore.core.customer.model.dto.CreateCustomerDTO;
 import com.getir.bookstore.core.customer.service.CustomerService;
 import com.getir.bookstore.core.customer.usecase.CreateCustomerUseCase;
 import com.getir.bookstore.core.customer.validation.CreateCustomerValidation;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,10 +13,12 @@ public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
 
     private final CustomerService customerService;
     private final CreateCustomerValidation createCustomerValidation;
+    private final PasswordEncoder passwordEncoder;
 
-    public CreateCustomerUseCaseImpl(CustomerService customerService, CreateCustomerValidation createCustomerValidation) {
+    public CreateCustomerUseCaseImpl(CustomerService customerService, CreateCustomerValidation createCustomerValidation, PasswordEncoder passwordEncoder) {
         this.customerService = customerService;
         this.createCustomerValidation = createCustomerValidation;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -29,9 +32,11 @@ public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
         customer.setLastName(createCustomerDTO.getLastName());
         customer.setEmail(createCustomerDTO.getEmail());
         customer.setCellPhone(createCustomerDTO.getCellPhone());
-
-        //TODO: password encoded
-
+        customer.setPassword(encodePassword(createCustomerDTO));
         return customerService.save(customer);
+    }
+
+    private String encodePassword(CreateCustomerDTO createCustomerDTO) {
+        return passwordEncoder.encode(createCustomerDTO.getPassword());
     }
 }

@@ -16,8 +16,6 @@ public class FilterOrderResponse {
 
     private BigDecimal totalPrice;
 
-    private String status;
-
     private Date createdOn;
 
 }

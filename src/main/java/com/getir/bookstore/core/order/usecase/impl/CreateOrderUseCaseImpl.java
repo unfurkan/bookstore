@@ -48,7 +48,7 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
     public Order exec(CreateOrderDTO createOrderDTO) {
 
         Order order = new Order();
-        order.setCode(createOrderDTO.getNote());
+        order.setNote(createOrderDTO.getNote());
         order.setDeliveryAddress(createOrderDTO.getDeliveryAddress());
         order.setInvoiceAddress(createOrderDTO.getInvoiceAddress());
         order.setCode(ORD_PREFIX + new Date().getTime());
