@@ -1,14 +1,17 @@
 package com.getir.bookstore.configuration.security;
 
 import com.getir.bookstore.common.utils.JwtUtil;
+import com.getir.bookstore.core.security.CustomUserDetailService;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -35,13 +38,14 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(auth -> auth
+                        .antMatchers(HttpMethod.POST, SIGN_UP_CUSTOMER).permitAll()
                         .antMatchers(
-                                HttpMethod.POST,SIGN_UP_CUSTOMER,
                                 SWAGGER_URL,
+                                SWAGGER_UI_URL,
                                 SWAGGER_UI_HTML,
                                 TOKEN_URL,
                                 BOOKS_STORE_FRONT
-                                ).permitAll()
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

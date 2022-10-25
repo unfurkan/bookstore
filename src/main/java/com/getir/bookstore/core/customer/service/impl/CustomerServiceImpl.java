@@ -1,9 +1,15 @@
 package com.getir.bookstore.core.customer.service.impl;
 
+import com.getir.bookstore.common.pageable.request.Pageable;
+import com.getir.bookstore.common.utils.PagingUtils;
 import com.getir.bookstore.core.customer.model.domain.Customer;
+import com.getir.bookstore.core.customer.model.dto.FilterCustomerDTO;
 import com.getir.bookstore.core.customer.repository.CustomerRepository;
 import com.getir.bookstore.core.customer.service.CustomerService;
+import com.getir.bookstore.core.customer.specification.FilterCustomerSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -14,6 +20,7 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final FilterCustomerSpecification filterCustomerSpecification;
 
     public static final String CUSTOMER_NOT_FOUND = "customer.not.found";
 
@@ -41,5 +48,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Optional<Customer> findByEmail(String username) {
         return customerRepository.findByEmail(username);
+    }
+
+    @Override
+    public Page<Customer> filterPaging(Pageable<FilterCustomerDTO> filterCustomerDTOPagable) {
+        PageRequest pageRequest = PagingUtils.createPageRequest(filterCustomerDTOPagable);
+        return customerRepository.findAll(filterCustomerSpecification.filter(filterCustomerDTOPagable.getFilter()), pageRequest);
     }
 }

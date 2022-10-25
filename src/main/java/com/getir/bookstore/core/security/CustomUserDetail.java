@@ -1,4 +1,4 @@
-package com.getir.bookstore.configuration.security;
+package com.getir.bookstore.core.security;
 
 import lombok.Getter;
 import lombok.Setter;

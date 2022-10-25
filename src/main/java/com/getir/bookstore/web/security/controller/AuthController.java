@@ -1,7 +1,6 @@
 package com.getir.bookstore.web.security.controller;
 
 import com.getir.bookstore.common.response.ApplicationResponse;
-import com.getir.bookstore.configuration.security.CustomUserDetailService;
 import com.getir.bookstore.core.common.security.TokenService;
 import com.getir.bookstore.web.security.request.TokenRequest;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +20,7 @@ public class AuthController {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthController(TokenService tokenService, AuthenticationManager authenticationManager, CustomUserDetailService customUserDetailService) {
+    public AuthController(TokenService tokenService, AuthenticationManager authenticationManager) {
         this.tokenService = tokenService;
         this.authenticationManager = authenticationManager;
     }

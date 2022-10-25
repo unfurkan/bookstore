@@ -2,6 +2,7 @@ package com.getir.bookstore.core.order.model.domain;
 
 
 import com.getir.bookstore.core.book.model.domain.Book;
+import com.getir.bookstore.core.common.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @Table(name = "ORDER_ITEMS")
 @Entity
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,7 @@
 package com.getir.bookstore.core.common.security;
 
+import com.getir.bookstore.core.security.CustomUserDetail;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -26,6 +26,7 @@ public class TokenService {
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .subject(authentication.getName())
+                .claim("id",((CustomUserDetail) authentication.getPrincipal()).getId().toString())
                 .build();
         return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }

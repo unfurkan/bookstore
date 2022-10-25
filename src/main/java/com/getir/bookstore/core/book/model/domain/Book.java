@@ -1,8 +1,10 @@
 package com.getir.bookstore.core.book.model.domain;
 
+import com.getir.bookstore.core.common.BaseEntity;
 import com.getir.bookstore.core.order.model.domain.BookStock;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.engine.spi.ManagedEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,7 +14,7 @@ import java.util.Date;
 @Setter
 @Table(name = "BOOKS")
 @Entity
-public class Book {
+public class Book extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

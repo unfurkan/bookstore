@@ -15,4 +15,6 @@ public class FilterOrderRequest {
 
     private Date endDate;
 
+    private String bookTitle;
+
 }

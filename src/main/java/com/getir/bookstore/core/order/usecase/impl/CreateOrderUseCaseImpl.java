@@ -1,9 +1,9 @@
 package com.getir.bookstore.core.order.usecase.impl;
 
+import com.getir.bookstore.common.exception.RequestNotValidException;
+import com.getir.bookstore.common.response.ApplicationMessageResponse;
 import com.getir.bookstore.core.book.model.domain.Book;
-import com.getir.bookstore.core.book.model.dto.UpdateStockDTO;
 import com.getir.bookstore.core.book.service.BookService;
-import com.getir.bookstore.core.book.usecase.UpdateStockUseCase;
 import com.getir.bookstore.core.customer.model.domain.Customer;
 import com.getir.bookstore.core.customer.service.CustomerService;
 import com.getir.bookstore.core.order.model.domain.BookStock;
@@ -11,11 +11,11 @@ import com.getir.bookstore.core.order.model.domain.Order;
 import com.getir.bookstore.core.order.model.domain.OrderItem;
 import com.getir.bookstore.core.order.model.dto.CreateOrderDTO;
 import com.getir.bookstore.core.order.model.dto.CreateOrderItemDTO;
-import com.getir.bookstore.core.order.service.BookStockService;
 import com.getir.bookstore.core.order.service.OrderItemService;
 import com.getir.bookstore.core.order.service.OrderService;
 import com.getir.bookstore.core.order.usecase.CreateOrderUseCase;
-import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +23,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
@@ -34,12 +35,14 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
     private final BookService bookService;
     private final CustomerService customerService;
     private final OrderItemService orderItemService;
+    private final MessageSource messageSource;
 
-    public CreateOrderUseCaseImpl(OrderService orderService, BookService bookService, CustomerService customerService, OrderItemService orderItemService) {
+    public CreateOrderUseCaseImpl(OrderService orderService, BookService bookService, CustomerService customerService, OrderItemService orderItemService, MessageSource messageSource) {
         this.orderService = orderService;
         this.bookService = bookService;
         this.customerService = customerService;
         this.orderItemService = orderItemService;
+        this.messageSource = messageSource;
     }
 
 
@@ -89,20 +92,20 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
         orderItem.setBook(book);
         orderItem.setUnitPrice(book.getUnitPrice());
 
-        updateStock(createOrderItemDTO, book.getStock());
+        updateStock(createOrderItemDTO, book);
 
         return orderItem;
     }
 
-    private void updateStock(CreateOrderItemDTO createOrderItemDTO, BookStock stock) {
+    private void updateStock(CreateOrderItemDTO createOrderItemDTO, Book book) {
 
-        Integer remainingStock = stock.getStockAmount() - createOrderItemDTO.getQuantity();
+        Integer remainingStock = book.getStock().getStockAmount() - createOrderItemDTO.getQuantity();
 
         if (remainingStock < 0) {
-            throw new RuntimeException(STOCK_NOT_AVAILABLE);
+            throw new RequestNotValidException(List.of(setResponseWithArgs(STOCK_NOT_AVAILABLE, Stream.of(book.getTitle()).toArray())));
         }
 
-        stock.setStockAmount(remainingStock);
+        book.getStock().setStockAmount(remainingStock);
 
     }
 
@@ -114,4 +117,14 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
         return bookService.getById(bookId);
     }
 
+
+    public ApplicationMessageResponse setResponseWithArgs(String message, Object[] args) {
+        return getApplicationMessageResponse(messageSource.getMessage(message, args, LocaleContextHolder.getLocale()));
+    }
+
+    private ApplicationMessageResponse getApplicationMessageResponse(String message) {
+        ApplicationMessageResponse applicationMessageResponse = new ApplicationMessageResponse();
+        applicationMessageResponse.setMessage(message);
+        return applicationMessageResponse;
+    }
 }

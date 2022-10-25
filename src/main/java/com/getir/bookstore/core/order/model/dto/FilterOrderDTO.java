@@ -15,4 +15,6 @@ public class FilterOrderDTO {
 
     private Long customerId;
 
+    private String bookTitle;
+
 }

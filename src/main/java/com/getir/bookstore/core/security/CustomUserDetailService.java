@@ -1,4 +1,4 @@
-package com.getir.bookstore.configuration.security;
+package com.getir.bookstore.core.security;
 
 import com.getir.bookstore.core.customer.model.domain.Customer;
 import com.getir.bookstore.core.customer.service.CustomerService;
@@ -27,7 +27,6 @@ public class CustomUserDetailService implements UserDetailsService {
                 .findFirst()
                 .orElse(null);
     }
-
 
     private CustomUserDetail createCustomUserDetail(Customer customer) {
 
