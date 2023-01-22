@@ -5,7 +5,7 @@
 - Registering New Customer
 - Placing a new order
 - Tracking the stock of books,filter books dynamicaly
-- List all orders of the customer,filter orders by date, customer,and code
+- List all orders of the customer,filter orders by date, customer,and book
 - Viewing the order details
 - Query Monthly Statistics
 - Entity auditing
