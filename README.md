@@ -4,8 +4,8 @@
 ### Features
 - Registering New Customer
 - Placing a new order
-- Tracking the stock of books
-- List all orders of the customer
+- Tracking the stock of books,filter books dynamicaly
+- List all orders of the customer,filter orders by date, customer,and code
 - Viewing the order details
 - Query Monthly Statistics
 - Entity auditing
