@@ -14,4 +14,4 @@
 
 ###System Entity Overview - UML Diagram
 
-![](https://github.com/unfurkan/files/blob/main/bookstore_UML.png)
+![](https://github.com/unfurkan/bookstore/blob/develop/bookstore_UML.png)
